@@ -298,7 +298,7 @@
                 android:textSize="20sp" />
 
             <Button
-                android:id="@+id/buttonDecimal"
+                android:id="@+id/buttonDot"
                 android:layout_width="72dp"
                 android:layout_height="80dp"
                 android:layout_marginLeft="5dp"

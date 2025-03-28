@@ -11,28 +11,11 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    Button add;
-    Button sub;
-    Button mul;
-    Button div;
-    Button per;
-    Button equ;
-    Button dec;
-    Button del;
-    Button cle;
-    Button bu0;
-    Button bu1;
-    Button bu2;
-    Button bu3;
-    Button bu4;
-    Button bu5;
-    Button bu6;
-    Button bu7;
-    Button bu8;
-    Button bu9;
+    Button add, sub, mul, div, per, equ, dec, del, cle, bu0, bu1, bu2, bu3, bu4, bu5, bu6, bu7, bu8, bu9, dot;
 
     TextView current;
     TextView method;
@@ -60,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         div = findViewById(R.id.buttonDivision);
         per = findViewById(R.id.buttonPercentage);
         equ = findViewById(R.id.buttonEqual);
-        dec = findViewById(R.id.buttonDecimal);
+        dec = findViewById(R.id.buttonDot);
         del = findViewById(R.id.buttonDelete);
         cle = findViewById(R.id.buttonClear);
         bu0 = findViewById(R.id.button0);
@@ -73,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         bu7 = findViewById(R.id.button7);
         bu8 = findViewById(R.id.button8);
         bu9 = findViewById(R.id.button9);
+        dot = findViewById(R.id.buttonDot);
 
         current = findViewById(R.id.textViewCurrent);
         method = findViewById(R.id.textViewMethod);
@@ -82,8 +66,31 @@ public class MainActivity extends AppCompatActivity {
         currentInput = "";
         allInts = new ArrayList<>();
         operators = new ArrayList<>();
+        DecimalFormat df = new DecimalFormat();
 
 //_______________________Button clicks_______________________
+        dot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!currentInput.contains(".")) {
+                    StringBuilder compare = new StringBuilder("0");
+                    StringBuilder empty = new StringBuilder("");
+                    if (currentString.toString().equals(compare.toString())) {
+                        currentString.append(".");
+                        currentInput = currentInput + ".";
+                        current.setText(currentString);
+                    } else if (currentString.toString().equals(empty.toString())) {
+                        currentString.append("0.");
+                        currentInput = currentInput + "0.";
+                        current.setText(currentString);
+                    }else {
+                        currentString.append(".");
+                        currentInput = currentInput + ".";
+                        current.setText(currentString);
+                    }
+                } dot.setTextColor(getResources().getColor(R.color.greyedOut));
+            }
+        });
         bu0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -318,10 +325,10 @@ public class MainActivity extends AppCompatActivity {
 
                 while(operators.contains("/")){
                     int index = operators.indexOf("/");
-                    int valA = Integer.parseInt(allInts.get(index));
-                    int valB = Integer.parseInt(allInts.get(index + 1));
-                    int newVal = valA / valB;
-                    String newValString = Integer.toString(newVal) ;
+                    Float valA = Float.parseFloat(allInts.get(index));
+                    Float valB = Float.parseFloat(allInts.get(index + 1));
+                    Float newValFloat = valA / valB;
+                    String newValString = String.valueOf(df.format(newValFloat)) ;
                     allInts.set(index, newValString);
                     allInts.remove(index + 1);
                     operators.remove(index);
@@ -329,10 +336,10 @@ public class MainActivity extends AppCompatActivity {
 
                 while(operators.contains("x")){
                     int index = operators.indexOf("x");
-                    int valA = Integer.parseInt(allInts.get(index));
-                    int valB = Integer.parseInt(allInts.get(index + 1));
-                    int newVal = valA * valB;
-                    String newValString = Integer.toString(newVal) ;
+                    Float valA = Float.parseFloat(allInts.get(index));
+                    Float valB = Float.parseFloat(allInts.get(index + 1));
+                    Float newValFloat = valA * valB;
+                    String newValString = String.valueOf(df.format(newValFloat)) ;
                     allInts.set(index, newValString);
                     allInts.remove(index + 1);
                     operators.remove(index);
@@ -340,10 +347,10 @@ public class MainActivity extends AppCompatActivity {
 
                 while(operators.contains("+")){
                     int index = operators.indexOf("+");
-                    int valA = Integer.parseInt(allInts.get(index));
-                    int valB = Integer.parseInt(allInts.get(index + 1));
-                    int newVal = valA + valB;
-                    String newValString = Integer.toString(newVal) ;
+                    Float valA = Float.parseFloat(allInts.get(index));
+                    Float valB = Float.parseFloat(allInts.get(index + 1));
+                    Float newValFloat = valA + valB;
+                    String newValString = String.valueOf(df.format(newValFloat)) ;
                     allInts.set(index, newValString);
                     allInts.remove(index + 1);
                     operators.remove(index);
@@ -351,18 +358,16 @@ public class MainActivity extends AppCompatActivity {
 
                 while(operators.contains("-")){
                     int index = operators.indexOf("-");
-                    int valA = Integer.parseInt(allInts.get(index));
-                    int valB = Integer.parseInt(allInts.get(index + 1));
-                    int newVal = valA - valB;
-                    String newValString = Integer.toString(newVal) ;
+                    Float valA = Float.parseFloat(allInts.get(index));
+                    Float valB = Float.parseFloat(allInts.get(index + 1));
+                    Float newValFloat = valA - valB;
+                    String newValString = String.valueOf(df.format(newValFloat)) ;
                     allInts.set(index, newValString);
                     allInts.remove(index + 1);
                     operators.remove(index);
                 }
 
                 String result = allInts.get(0) ;
-//                StringBuilder def = new StringBuilder("");
-//                currentString = def;
                 current.setText(result);
             }
         });
