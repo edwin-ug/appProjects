@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     String currentInput;
     ArrayList<String> allInts;
     ArrayList<String> operators;
+    String sign;
 
     
 
@@ -256,48 +257,93 @@ public class MainActivity extends AppCompatActivity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                currentString.append("+");
-                current.setText(currentString);
-                allInts.add(currentInput);
-                currentInput = "";
-                operators.add("+");
+                if(currentInput == "" & sign == "+") {
+                    // Do nothing
+                }else if(currentInput == "" & sign != "+"){
+                    currentString.deleteCharAt(currentString.length()-1);
+                    currentString.append("+");
+                    current.setText(currentString);
+                    operators.remove(operators.size()-1);
+                    operators.add("+");
+                    sign = "+";
+                } else {
+                    currentString.append("+");
+                    current.setText(currentString);
+                    allInts.add(currentInput);
+                    currentInput = "";
+                    operators.add("+");
+                    sign = "+";
+                }
             }
         });
 
         sub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                currentString.append("-");
-                current.setText(currentString);
-                allInts.add(currentInput);
-                currentInput = "";
-                operators.add("-");
+                if(currentInput == "" & sign == "-"){
+                    // Do nothing
+                }else if(currentInput == "" & sign != "-"){
+                    currentString.deleteCharAt(currentString.length()-1);
+                    currentString.append("-");
+                    current.setText(currentString);
+                    operators.remove(operators.size()-1);
+                    operators.add("-");
+                    sign = "-";
+                } else {
+                    currentString.append("-");
+                    current.setText(currentString);
+                    allInts.add(currentInput);
+                    currentInput = "";
+                    operators.add("-");
+                    sign = "-";
+                }
             }
         });
 
         mul.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                currentString.append("x");
-                current.setText(currentString);
-                allInts.add(currentInput);   //problem
-                currentInput = "";
-                operators.add("x");
+                if(currentInput == "" & sign == "x"){
+                    // Do nothing
+                }else if(currentInput == "" & sign != "x"){
+                    currentString.deleteCharAt(currentString.length()-1);
+                    currentString.append("x");
+                    current.setText(currentString);
+                    operators.remove(operators.size()-1);
+                    operators.add("x");
+                    sign = "x";
+                } else {
+                    currentString.append("x");
+                    current.setText(currentString);
+                    allInts.add(currentInput);   //problem
+                    currentInput = "";
+                    operators.add("x");
+                    sign = "x";
+                }
             }
         });
 
         div.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                currentString.append("/");
-                current.setText(currentString);
-                if (currentInput == ""){
-                    // Skip any addition
+                if(currentInput == "" & sign == "/"){
+                    // Do nothing
+                }else if(currentInput == "" & sign != "/"){
+                    currentString.deleteCharAt(currentString.length()-1);
+                    currentString.append("/");
+                    current.setText(currentString);
+                    operators.remove(operators.size()-1);
+                    operators.add("/");
+                    sign = "/";
+
                 } else {
+                    currentString.append("/");
+                    current.setText(currentString);
                     allInts.add(currentInput);
+                    currentInput = "";
+                    operators.add("/");
+                    sign = "/";
                 }
-                currentInput = "";
-                operators.add("/");
             }
         });
 
