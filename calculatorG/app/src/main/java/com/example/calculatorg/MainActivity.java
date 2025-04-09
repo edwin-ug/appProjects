@@ -300,9 +300,17 @@ public class MainActivity extends AppCompatActivity {
         del.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                currentString.deleteCharAt(currentString.length()-1);
-                currentInput = currentInput.substring(0, currentInput.length() - 1);
-                current.setText(currentString);
+                if (currentString.length() > 1){
+                    currentString.deleteCharAt(currentString.length()-1);
+                    currentInput = currentInput.substring(0, currentInput.length() - 1);
+                    current.setText(currentString);
+                }else if (currentString.length() == 1){
+                    currentString.deleteCharAt(0);
+                    currentInput = currentInput.substring(0, 0);
+                    current.setText(currentString);
+                }else{
+                    // Do nothing: Cant delete what's not there to begin with
+                }
             }
         });
 
