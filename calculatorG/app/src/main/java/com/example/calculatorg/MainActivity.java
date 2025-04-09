@@ -280,7 +280,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 currentString.append("x");
                 current.setText(currentString);
-                allInts.add(currentInput);
+                allInts.add(currentInput);   //problem
                 currentInput = "";
                 operators.add("x");
             }
@@ -291,7 +291,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 currentString.append("/");
                 current.setText(currentString);
-                allInts.add(currentInput);
+                if (currentInput == ""){
+                    // Skip any addition
+                } else {
+                    allInts.add(currentInput);
+                }
                 currentInput = "";
                 operators.add("/");
             }
@@ -376,7 +380,15 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 String result = allInts.get(0) ;
+                StringBuilder resultStringBuilder = new StringBuilder(result);
+                currentString = resultStringBuilder;
+                currentInput = result;
                 current.setText(result);
+                if(!allInts.isEmpty()){
+                    allInts.remove(0);
+                }else{
+                    // Do absolutely nothing
+                }
             }
         });
     }
